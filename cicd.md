@@ -66,3 +66,30 @@ console.log(error in spawnning the process  )
 }
 
  })
+
+
+
+ # ZERO DOWNTIME DEPLOYEMENT  : 
+ 
+ zero down time deployement means 0 sec of end of service when deploying our new file and doing cicd 
+ but when we do like this : 
+ bashscript : 
+ git pull
+ npm i 
+ pm2 restart
+
+ and then our script run normally without configuring pm2 we get downtime of 1-2 sec which is huge if your app have user and not good at all cuz for that 1-2 sec the server will be unresponsible 
+
+ so to get zero downtime : we have to configure pm2 to get 0 downtime 
+ 1>  we have to run our main server using pm2 in cluster mode and most imp we have to use dotenv for it sending env file using flag eg --env=.env dosent work 
+
+ 2> and what does mean by cluster mode means we will create 2 instance of our backend server means 2 server using pm2 eg : pm2 start serverStartingfilename.js  -- serverfilename - i 2  
+
+ this will create  instance of our server and run it on cluster mode 
+
+ 3> now dont use  pm2 restart use pm2 reload isnted , pm2 resrart do a hard reset and still take time to run back 
+ pm2 reload is quick 
+
+ 4> how this helps when we run our server in cluster mode they run on same port and req came to both server one by one one in 1 st and one in 2nd like this so when we do pm2 reload the first server reload but thre sec cluster server stillr unning the incomming re migrate tot that cluster server and when the   1st server finish reloaing the sec reoad automatically an the req migrate like this and thus this create a ZERO DOWNTIME DEPLOYEMENT 
+
+ 5> also inside bashh script in cicd use pm2 reload .
