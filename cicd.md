@@ -29,7 +29,7 @@ console.log(error in spawnning the process  )
 
 # steps to setup cicd pipeline with github webhook
  
- what is github webhook in any repo we have a section called github webhook there we paste the url of our live backend api witht he webhook endpoint eg : api.eg.com/github-webhoook , and also add a secrete key there so in future when ever we do a git push in this particular repo this webhook trigger and do a http req to this given api and run this aprticual enpoint function and inside that function we declare all these ci-cd pipeline setup what we  did in  #steps to create cicd pipeline , and this particular cicd pipeline run And this particular command  : spawn("bash" , /routeOfthatFile xyz.sh) , runs all the command and a ci cd pipe line gets created and this is what its all about using github webhooks 
+ what is github webhook in any repo we have a section called github webhook there we paste the url of our live backend api with the webhook endpoint eg : api.eg.com/github-webhoook , and also add a secrete key there so in future when ever we do a git push in this particular repo this webhook trigger and do a http req to this given api and run this aprticual enpoint function and inside that function we declare all these ci-cd pipeline setup what we  did in  #steps to create cicd pipeline , and this particular cicd pipeline run And this particular command  : spawn("bash" , /routeOfthatFile xyz.sh) , runs all the command and a ci cd pipe line gets created and this is what its all about using github webhooks 
  # eg : 
 
  app.use(/github-wbhook , (req,res)=>{
