@@ -376,6 +376,3 @@ Build a Bangalore Pincode Explorer (Full stack app: pincode - area name)
 
 
 
-Hi, I’m a Full Stack Developer with a strong focus on Backend Engineering using Node.js. I have hands-on experience building and deploying full-stack applications, with expertise in backend architecture, authentication, APIs, databases, security, and performance.
-
-If prior professional experience is not mandatory, I believe my technical skills and hands-on project experience would make me a strong fit for this role. I’m highly motivated to learn, contribute, and grow with the team.
