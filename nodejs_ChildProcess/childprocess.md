@@ -22,3 +22,10 @@ const f = fork(nodejsscriptmeansfile.js)
 f.on(message , (msg)=>{
     console.log(msg)
 })
+
+# to send data from main to child we use :
+child.send(message to child) sending from main process to child 
+
+process.send(message to main) sending from child process to main 
+
+to access theese we just needd to use event emmitter .on(message)

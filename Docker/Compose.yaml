@@ -1,0 +1,51 @@
+version : 3.2
+name : dockercomposeeg #this is the name of this container 
+
+service:  # here we can give muitple service  and these run in random order and servies are basically container
+
+  nodejs: # name of the service 
+   # image: imagename # this is the image name which we want to run 
+
+    build: # we can use image or build not both and we use build for  custom image .  
+      context: ./path # path that folder where we have custom docker file ie image
+      dockerfile: Dockerfile # name of the dockerfile
+    name: containername # this is the name of the container which we want to give
+    environment: # here we can give the environment variable which we want to set in the container
+      - NODE_ENV=production 
+      - PORT=5000 
+      - MONGO_URL=mongodb://root:example@mongodb  # WEHAVE TO GIVE THE SERVICE NAME IN STRING AN PORT WILL ACESSSED AUTOMATICALLY
+    ports: # here we can give the port number which we want to expose 
+      - "6000:5000"
+    depends_on: # here we can give the service name which we want to run before this service
+      - mongodb 
+    volumes: 
+      - nodejsdata:/app # now any cahnged done in this container will reflect autommatically without rebuidlign the image .
+    
+
+
+mongodb:
+    image: mongo   # here we using image cuz there are db premade image in dockerhub we're using it .
+    name: mongodbcontainer 
+    environment: 
+      - MONGO_INITDB_ROOT_USERNAME=root 
+      - MONGO_INITDB_ROOT_PASSWORD=example 
+    env_file:  # we  can also pass the whole env file instead of giving the environment variable one by one
+      - ./env  # path of the env file
+    ports:
+      - "27017:27017" 
+    volumes: # here we can give the volume name which we want to use in the container and this volume will be created automatically if it is not present
+      - mongodbdata:/data/db # here we are giving the volume name and path where we want to mount the volume in the container
+
+
+frontend: 
+    image: frontendimage # here also we will use build :{ context: ./path , dcoekrfilename }
+    name: frontendcontainer 
+    environment: 
+      - NODE_ENV=production 
+      - PORT=3000 
+    ports:  
+      - "3000:3000" 
+
+volumes: # here we can give the volume name which we want to use in the container and this volume will be created automatically if it is not present
+  mongodbdata: # this is the name of the volume 
+    driver: local  #The local driver stores data on the machine where Docker Engine is running.
