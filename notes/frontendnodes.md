@@ -6,21 +6,51 @@ difference between navigate , use  navigate , navlink and link in react
 
 JSX (JavaScript XML) is a syntax extension for JavaScript that lets you write HTML-like code inside JavaScript. React uses JSX to describe what the UI should look like.
 
-🔹 What is React, and why is it used ?
+# STATES vs variable in react 
+react only change value in ui when its component re render and value only chagne when the variabke are inside state . eg use state , normal varaible dosent cause rerender in react  they cahnge the value but they do not cause re render so they directly get updated in ui . 
+
+
+
+# What is React, and why is it used ?
 React is a JavaScript library developed by Facebook for creating user interfaces, particularly in single-page applications. It enables the use of reusable components that manage their own state. Key advantages include a component-driven architecture, optimized updates through the virtual DOM, a declarative approach for better readability, and robust community backing.
 
 When we say React is a Single Page Application (SPA), we mean that the browser loads only one HTML page initially, and after that, React updates the page dynamically instead of loading a completely new page from the server.
 
+# REACT EVENT calling 
+In React, when handling events like onClick, onSubmit, onChange, etc., you pass a function reference, not a function call. means we dont pass function with () we just pass the reference . 
+But then how we wil pass the parameter if we cant use () so the thing is we use call back or arrow fn to overcome this for eg : {()=>onClick(parameter)}
+this is how wee can pass the parameteer with function call
 
-🔹 Functional Components vs Class Components
+# Controlled Components 
+controlled components are components which have a form imput  whose value  is purely controlled by the states
+working :
+1. input value are stored in states
+2. values are stored into state before submit event , eg getting value using on change event eg : on change ((name)=>{setname(e.target.value)}) when we do these inisde the form getting value before using on submit this is  what controlledd event mean 
+
+3. cotrolleed evvent means porper storing input value inside states getting values using on cahnge  and properly setting up the whole input form or whatever with proper settup aso cleaing up button to clear the input value if user want to erase it .
+
+# Props
+passing data from one comonent to another is calledd as prop , pops are called properties .
+# Default Props
+porps whose value are define as default inside the parameter eg : function app({pops a , colour="greeen"}) now whereevver we use this app function and pass colour then it will use that colour but if not passed the default is free
+
+# JSX AS Props
+we wrap up html isnde that fucntion and destructure it as an children in the main fun is called a passing jsx also children prop
+eg: <app> <h1> hi </h1> </app>
+ so now inside function app we just need to destructure children prop this is build it and we will get  this h1 
+
+ eg: app({children})=>{ return ( <div> children </div>)
+
+
+# Functional Components vs Class Components
 Class components are ES6 classes that extend React. Component and rely on lifecycle methods (componentDidMount, componentDidUpdate, etc.) and this.state.
 Function components are plain functions that take props as input and return JSX, and use hooks (useState, useEffect, useRef, etc.) for state and side effects.
 
 
-🔹side effect:
-A side effect is any operation performed by a React component that affects or interacts with something outside the component's rendering process. Examples include API calls, timers, event listeners, updating the document title, and accessing local Storage. Side effects are typically handled using the use Effect Hook.
+# side effect:
+unnecessary rendering of functions or a component when any random states changes is called as side efffect and these can be stoopedd using useEFFECT .
 
-🔹 Props vs State
+# Props vs State
 state is like a component's memory. It stores values that can change over time, and when they change, React automatically updates the UI.
 State is a component's memory. It stores data that can change over time. When the state changes, React automatically re-renders the component so the UI stays in sync with the latest data.
 State stores changing data.
@@ -29,9 +59,9 @@ Reconciliation compares old and new Virtual DOM.
 Real DOM is updated with only the necessary changes.
 
 Props (Properties) are a way to pass data from a parent component to a child component.
-  🔹 In React, the key prop is used to uniquely identify elements in a list, allowing React to optimize rendering by updating and reordering items more efficiently.
+ In React, the key prop is used to uniquely identify elements in a list, allowing React to optimize rendering by updating and reordering items more efficiently.
 
-🔹 Virtual DOM & Reconciliation :
+#  Virtual DOM & Reconciliation :
 
 Virtual DOM a lightweight JavaScript copy of the real DOM.It is not the actual webpage.
 The virtual DOM is a simplified version of the actual DOM used by React used to optimize rendering.
@@ -39,19 +69,18 @@ The virtual DOM is a simplified version of the actual DOM used by React used to 
 
 Reconciliation is the process React uses to figure out what changed in your UI and update only those parts in the real DOM.
 
-
-🔹Why not change the Real DOM directly?
+# Why not change the Real DOM directly?
 Because the browser's Real DOM is relatively expensive to manipulate. Imagine a page with 5,000 elements,  If one button's text changes, updating everything would be slow.
 
-🔹REACT NODE AND REACT FRAGMENT
+# REACT NODE AND REACT FRAGMENT
 A React Node refers to any unit that can be rendered in React, such as an element, string, number, or null EASY EG : html
 React Fragments allow you to group multiple elements without adding extra nodes to the DOM. e g <> </>
 
-🔹 Context API vs Redux
+#  Context API vs Redux
 🔹 Component Lifecycle : A React component goes through three major stages: mounting, updating, and unmounting. Mounting happens when the component is added to the UI, updating happens 	when its state, props, or relevant context changes and React re-renders it, and unmounting happens when it is removed. In function components, use Effect is commonly used to 	synchronize with external systems and perform cleanup when dependencies change or the component unmounts.
 
 
-🔹 Performance Optimization Techniques :
+#  Performance Optimization Techniques :
 1. Prevent Unnecessary Re-renders
 3. useMemo
 4. use Callback
@@ -78,21 +107,39 @@ Splitting contexts based on responsibility can reduce the number of affected con
 Avoid putting frequently changing values into a context consumed by a large portion of the application unless necessary.
 
 
+# Life Cycle Methods in React
+MOUNTING (CREATE) , UPDATING , UNMOUNTING (DELTEING ) THESE ARE THE 3PHASES lifestyle ofreact and is controlled by useeffect when we pass useeffect with no dependenice it get created  , when we pass dependencies with pops or states it udpated and when we use retunn inside useffect to clean it unmount . And unmounting main logic is inside the parent componet from wheere we conditional render the component if true and run the unmont when false . 
 
-✅ Difference between useMemo and useCallback.
+ask ; if we are conditional rendering than the component will nto even calle if false than how the return use effect will run and how unmount will be done 
+
+Answer: React ko component ka previous render yaad rehta hai. React internally track karta hai ki kaunsa component mount hua tha aur uske effects registered hain.
+
+
+# Styled Component:
+styled component are 3rd party npm pakage used to create a centralizeeed styling which can be used in the whoe compnent without giving styling again and again to same html tag 
+
+for eg : we use mutiple h1 tag in one component and isnted of stylign every h1 tag inidvidualy we will create one styled compoent for h1 tag for that particualr compient and use that styled comonent for css across every h1 tag in tahat component eg 
+
+const heading = styled.h1`
+colour : red ; text: grey; margin: 20px; ` 
+
+now instedd of using  h1 use heading : <heading> this is styled h1  comonent </heaing>  this is now h1 tag the heading tag 
+s
+
+#  Difference between useMemo and useCallback.
 
 
 
-✅ State vs Props.
+#  State vs Props.
 	Props are like arguments passed to a function. Parent gives the props:The child receives these values
 	State is data that belongs to the component. state can become props.State can cause re-render
 
 
-✅ What triggers a React component to re-render?
+#  What triggers a React component to re-render?
 	A React component re-renders when its state changes, when its parent re-renders, when a Context value it consumes changes, or when an external store or subscription it uses updates. A props change is normally a consequence of the parent rendering with different values.
 	
 
-✅ Besides state and props, what else can trigger re-renders?
+#  Besides state and props, what else can trigger re-renders?
 A component can re-render when its own state changes, when its parent re-renders, when a consumed Context value changes, or when an external store or subscription that the component depends on updates. use Reducer dispatches also trigger updates. In development, Strict Mode can cause additional render invocations. A re-render doesn't necessarily mean the actual DOM will be updated because React performs reconciliation and only commits the necessary DOM changes."
 
 
